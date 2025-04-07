@@ -288,7 +288,7 @@ const FormBuid = () => {
       >
         Submit
       </button>
-      <div className="mt-8">
+      <div className="mt-8 block">
         <AdSenseAd />
       </div>
     </div>
