@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/authSlice";
@@ -24,6 +24,7 @@ const FormBuid = () => {
     );
     setSelectedSkills(selectedOptions);
   };
+  
 
   const [numExperiences, setNumExperiences] = useState(0);
   const [experiences, setExperiences] = useState([]);

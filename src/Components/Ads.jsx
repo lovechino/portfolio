@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const AdSenseAd = () => {
+  useEffect(()=>{
+    try{
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }catch(err){
+      console.error(err);
+    }
+  })
     return (
         <div className="ad-container">
           <ins className="adsbygoogle"
@@ -9,9 +16,6 @@ const AdSenseAd = () => {
             data-ad-slot="1981608578"
             data-ad-format="auto"
             data-full-width-responsive="true"></ins>
-          <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
         </div>
       );
 };
