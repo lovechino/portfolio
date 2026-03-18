@@ -26,7 +26,7 @@ export function Hero() {
   }, { scope: container })
 
   return (
-    <section ref={container} className="relative min-h-screen w-full overflow-hidden px-4 py-32 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+    <section id="hero" ref={container} className="relative min-h-screen w-full overflow-hidden px-4 py-32 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
       <div className="mx-auto max-w-5xl">
         <div className="space-y-10">
           <div className="space-y-6">
@@ -35,7 +35,7 @@ export function Hero() {
             </div>
 
             <h1 className="text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-[100px] leading-[1.1] pb-2">
-              <span className="hero-name bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary animate-gradient bg-[length:200%_auto] block">
+              <span className="hero-name bg-clip-text text-blue bg-gradient-to-r from-primary via-accent to-primary animate-gradient bg-[length:200%_auto] block">
                 {t.hero.name}
               </span>
             </h1>

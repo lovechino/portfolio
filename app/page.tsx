@@ -9,6 +9,7 @@ import { Skills } from '@/components/skills'
 import { Experience } from '@/components/experience'
 import { Projects } from '@/components/projects'
 import { Contact } from '@/components/contact'
+import { ScrollBot } from '@/components/scroll-bot'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -51,6 +52,7 @@ export default function Home() {
   return (
     <LanguageProvider>
       <Header />
+      <ScrollBot />
       <div className="relative">
         <div ref={sectionsRef}>
           <Hero />
