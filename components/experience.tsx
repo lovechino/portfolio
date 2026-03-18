@@ -15,28 +15,45 @@ export function Experience() {
   const t = translations[language]
   const container = useRef<HTMLDivElement>(null);
   useGSAP(() => {
-    const items = gsap.utils.toArray(".exp-card")
-    
-    items.forEach((el: any) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom-=100", // Bắt đầu khi item cách đáy màn hình 100px
-          end: "bottom top+=100",   // Kết thúc khi item cách đỉnh màn hình 100px
-          scrub: 1,
-        }
-      });
+    const cards = gsap.utils.toArray<HTMLElement>(".card");
 
-      tl.fromTo(el, 
-        { opacity: 0, y: 50, scale: 0.9 }, 
-        { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" }
-      )
-      .to(el, 
-        { opacity: 0, y: -50, scale: 0.9, duration: 1, ease: "power2.in" }, 
-        "+=0.5" // Đợi một chút rồi mới fade out
-      );
-    })
-  }, { scope: container })
+    cards.forEach((card, index) => {
+      // 1. Hiệu ứng cho thẻ hiện tại khi lướt qua (Mờ hẳn đi và thu nhỏ)
+      if (index !== cards.length - 1) {
+        gsap.to(card, {
+          opacity: 0,
+          scale: 0.8,
+          filter: "blur(10px)", // Tạo hiệu ứng mờ ảo khi lướt qua
+          scrollTrigger: {
+            trigger: card,
+            start: "top top", // Bắt đầu khi thẻ chạm đỉnh màn hình
+            end: "bottom top",
+            scrub: true,
+            pin: true,        // Ghim thẻ lại
+            pinSpacing: false, // Thẻ sau sẽ tràn lên đè lên thẻ trước
+          },
+        });
+      }
+
+      // 2. Hiệu ứng cho thẻ tiếp theo (Rõ dần lên khi thẻ trước biến mất)
+      // Thẻ đầu tiên thì hiện sẵn, các thẻ sau sẽ bắt đầu từ opacity 0
+      if (index > 0) {
+        gsap.fromTo(card,
+          { opacity: 0.1, y: 100 },
+          {
+            opacity: 1,
+            y: 0,
+            scrollTrigger: {
+              trigger: cards[index - 1], // Kích hoạt khi thẻ phía trước bắt đầu bị cuộn
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            }
+          }
+        );
+      }
+    });
+  }, { scope: container });
   const experiences = [
     {
       company: t.experience.company1,
@@ -76,7 +93,7 @@ export function Experience() {
 
         <div className="space-y-8">
           {experiences.map((exp, index) => (
-            <div key={index} className="exp-card rounded-lg border border-border bg-card/50 p-6 lg:p-8">
+            <div key={index} className="card rounded-lg border border-border bg-card/50 p-6 lg:p-8">
               <div className="mb-4 flex flex-col justify-between gap-2 lg:flex-row lg:items-start">
                 <div>
                   <h3 className="text-xl font-semibold text-foreground">{exp.position}</h3>
