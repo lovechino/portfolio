@@ -1,18 +1,44 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import Image from 'next/image'
+import { useRef, useEffect, useState } from 'react'
+import Lottie from 'lottie-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export function ScrollBot() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const botRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [animationData, setAnimationData] = useState<any>(null);
+  const [showChat, setShowChat] = useState(false);
+
+  const handleClick = () => {
+    setShowChat(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setShowChat(false);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    fetch('/scroll-bot.json')
+      .then(res => res.json())
+      .then(data => setAnimationData(data))
+      .catch(err => console.error("Error loading lottie animation:", err));
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useGSAP(() => {
     if (!botRef.current) return;
@@ -97,19 +123,31 @@ export function ScrollBot() {
   return (
     <div
       ref={botRef}
-      className="fixed top-20 right-10 z-[100] pointer-events-none hidden md:block"
+      className="fixed top-20 right-10 z-[100] hidden md:block"
     >
       <div
         ref={iconRef}
-        className="flex h-20 w-20 items-center justify-center rounded-2xl bg-background/50 border-2 border-accent/30 shadow-2xl backdrop-blur-md overflow-hidden"
+        onClick={handleClick}
+        className="flex h-40 w-40 items-center justify-center cursor-pointer pointer-events-auto relative group"
       >
-        <Image 
-          src="/robot.svg" 
-          alt="Robot" 
-          width={60} 
-          height={60} 
-          className="robot-image object-contain transition-transform duration-500"
-        />
+        {showChat && (
+          <div className="absolute -top-12 right-0 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl rounded-tr-none shadow-xl border border-pink-100/50 text-pink-500 font-bold whitespace-nowrap animate-in fade-in slide-in-from-bottom-2 duration-300 z-[101]">
+            {t.hero.botGreeting}
+            <div className="absolute top-0 right-[-6px] w-4 h-4 bg-white/95 border-t border-r border-pink-100/50" 
+                 style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
+          </div>
+        )}
+        {animationData ? (
+          <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+            <Lottie 
+              animationData={animationData} 
+              loop={true}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        ) : (
+          <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110" />
+        )}
       </div>
     </div>
   )

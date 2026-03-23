@@ -22,7 +22,7 @@ export function Contact() {
             {t.contact.description}
           </p>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <a
               href="mailto:quochung13122002@gmail.com"
               className="group rounded-lg border border-border bg-background p-4 text-center transition hover:border-accent hover:bg-accent hover:bg-opacity-10"
@@ -30,15 +30,6 @@ export function Contact() {
               <Mail className="mx-auto mb-3 h-6 w-6 text-accent transition group-hover:scale-110" />
               <p className="text-sm font-semibold text-foreground">{t.contact.email}</p>
               <p className="truncate text-xs text-muted-foreground">quochung13122002@gmail.com</p>
-            </a>
-
-            <a
-              href="tel:+84974168187"
-              className="group rounded-lg border border-border bg-background p-4 text-center transition hover:border-accent hover:bg-accent hover:bg-opacity-10"
-            >
-              <Phone className="mx-auto mb-3 h-6 w-6 text-accent transition group-hover:scale-110" />
-              <p className="text-sm font-semibold text-foreground">{t.contact.phone}</p>
-              <p className="text-xs text-muted-foreground">+84 974 168 187</p>
             </a>
 
             <a

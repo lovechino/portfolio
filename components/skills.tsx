@@ -47,7 +47,7 @@ export function Skills() {
         scrollTrigger: {
           trigger: item,
           start: "top 95%",
-          toggleActions: "play none none none"
+          toggleActions: "restart none restart none"
         }
       });
 

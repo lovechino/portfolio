@@ -11,7 +11,14 @@ export function Hero() {
   const t = translations[language]
   const container = useRef<HTMLDivElement>(null)
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } })
+    const tl = gsap.timeline({ 
+      defaults: { ease: "power4.out" },
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top 80%",
+        toggleActions: "restart none restart none"
+      }
+    })
     tl.from(".hero-name", {
       y: 60,
       opacity: 0,
@@ -46,7 +53,7 @@ export function Hero() {
           </div>
 
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            I craft <span className="text-primary font-medium">beautiful</span>, performant user interfaces with <span className="text-accent font-medium">React and Next.js</span>. Passionate about building pixel-perfect experiences.
+            {t.hero.description}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
