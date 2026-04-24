@@ -8,22 +8,7 @@ export function Projects() {
   const { language } = useLanguage()
   const t = translations[language]
 
-  const projects = [
-    {
-      title: t.projects.projectTitle,
-      description: t.projects.projectDescription,
-      features: [
-        t.projects.feature1,
-        t.projects.feature2,
-        t.projects.feature3,
-        t.projects.feature4,
-      ],
-      techStack: ['Python', 'FastAPI', 'Sentence-Transformers', 'RAG Architecture', 'SSE', 'Ollama'],
-      links: {
-        github: 'https://github.com/lovechino/legal-ai',
-      },
-    },
-  ]
+  const projects = t.projects.list || [];
 
   const TagBadge = ({ text }: { text: string }) => (
     <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">

@@ -54,33 +54,7 @@ export function Experience() {
       }
     });
   }, { scope: container });
-  const experiences = [
-    {
-      company: t.experience.company1,
-      position: t.experience.position1,
-      period: t.experience.period1,
-      responsibilities: [
-        t.experience.responsibility1_1,
-        t.experience.responsibility1_2,
-        t.experience.responsibility1_3,
-        t.experience.responsibility1_4,
-        t.experience.responsibility1_5,
-        t.experience.responsibility1_6,
-      ],
-    },
-    {
-      company: t.experience.company2,
-      position: t.experience.position2,
-      period: t.experience.period2,
-      responsibilities: [
-        t.experience.responsibility2_1,
-        t.experience.responsibility2_2,
-        t.experience.responsibility2_3,
-        t.experience.responsibility2_4,
-        t.experience.responsibility2_5,
-      ],
-    },
-  ]
+  const experiences = t.experience.list || [];
 
   return (
     <section ref={container} id="experience" className="border-t border-border bg-background px-4 py-20 sm:px-6 lg:px-8">
