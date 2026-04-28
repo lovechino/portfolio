@@ -57,14 +57,22 @@ export function ChatDialog({ isOpen, onClose }: ChatDialogProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-4 z-[110] w-[calc(100vw-2rem)] sm:w-[350px] overflow-hidden rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
+    <div className="fixed bottom-6 right-6 z-[1000] w-[calc(100vw-3rem)] sm:w-[400px] overflow-hidden rounded-2xl border border-pink-100 bg-white shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
       {/* Header */}
-      <div className="flex items-center justify-between bg-pink-500 p-4 text-white">
-        <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5" />
-          <span className="font-semibold">Portfolio AI</span>
+      <div className="flex items-center justify-between bg-gradient-to-r from-pink-500 to-rose-500 p-4 text-white shadow-md">
+        <div className="flex items-center gap-3">
+          <div className="bg-white/20 p-1.5 rounded-lg backdrop-blur-sm">
+            <Bot className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="font-bold text-sm">Hùng's Assistant</h3>
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+              <span className="text-[10px] opacity-80 uppercase tracking-wider font-medium">Online</span>
+            </div>
+          </div>
         </div>
-        <button onClick={onClose} className="rounded-full p-1 hover:bg-white/20 transition-colors">
+        <button onClick={onClose} className="rounded-full p-2 hover:bg-white/20 transition-all">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -72,7 +80,7 @@ export function ChatDialog({ isOpen, onClose }: ChatDialogProps) {
       {/* Messages */}
       <div 
         ref={scrollRef}
-        className="h-[300px] overflow-y-auto p-4 space-y-4 bg-card/50 scroll-smooth"
+        className="h-[450px] overflow-y-auto p-4 space-y-4 bg-slate-50/50 scroll-smooth custom-scrollbar"
       >
         {messages.map((msg, i) => (
           <div
@@ -80,10 +88,10 @@ export function ChatDialog({ isOpen, onClose }: ChatDialogProps) {
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
+              className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm shadow-sm ${
                 msg.role === 'user'
                   ? 'bg-pink-500 text-white rounded-tr-none'
-                  : 'bg-white border border-pink-100 text-foreground rounded-tl-none'
+                  : 'bg-white border border-slate-100 text-slate-700 rounded-tl-none'
               }`}
             >
               {msg.content}
@@ -91,12 +99,12 @@ export function ChatDialog({ isOpen, onClose }: ChatDialogProps) {
           </div>
         ))}
         {isLoading && (
-          <div className="flex justify-start gap-2 items-center">
-            <div className="bg-white border border-pink-100 rounded-2xl rounded-tl-none px-4 py-2 shadow-sm">
-              <div className="flex gap-1">
-                <span className="w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce"></span>
-                <span className="w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+          <div className="flex justify-start">
+            <div className="bg-white border border-slate-100 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm">
+              <div className="flex gap-1.5">
+                <div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-duration:0.6s]"></div>
+                <div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.1s]"></div>
+                <div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.2s]"></div>
               </div>
             </div>
           </div>

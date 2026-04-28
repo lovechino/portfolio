@@ -121,38 +121,40 @@ export function ScrollBot() {
   }, []);
 
   return (
-    <div
-      ref={botRef}
-      className="fixed top-20 right-10 z-[100] hidden md:block"
-    >
+    <>
       <div
-        ref={iconRef}
-        onClick={handleClick}
-        className="flex h-40 w-40 items-center justify-center cursor-pointer pointer-events-auto relative group"
+        ref={botRef}
+        className="fixed top-20 right-10 z-[100] hidden md:block"
       >
-        {showChat && (
-          <div className="absolute -top-12 right-0 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl rounded-tr-none shadow-xl border border-pink-100/50 text-pink-500 font-bold whitespace-nowrap animate-in fade-in slide-in-from-bottom-2 duration-300 z-[101]">
-            {t.hero.botGreeting}
-            <div className="absolute top-0 right-[-6px] w-4 h-4 bg-white/95 border-t border-r border-pink-100/50" 
-                 style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
-          </div>
-        )}
-        {animationData ? (
-          <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-            <Lottie 
-              animationData={animationData} 
-              loop={true}
-              className="w-full h-full object-contain"
-            />
-          </div>
-        ) : (
-          <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110" />
-        )}
+        <div
+          ref={iconRef}
+          onClick={handleClick}
+          className="flex h-40 w-40 items-center justify-center cursor-pointer pointer-events-auto relative group"
+        >
+          {showChat && (
+            <div className="absolute -top-12 right-0 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl rounded-tr-none shadow-xl border border-pink-100/50 text-pink-500 font-bold whitespace-nowrap animate-in fade-in slide-in-from-bottom-2 duration-300 z-[101]">
+              {t.hero.botGreeting}
+              <div className="absolute top-0 right-[-6px] w-4 h-4 bg-white/95 border-t border-r border-pink-100/50" 
+                   style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
+            </div>
+          )}
+          {animationData ? (
+            <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+              <Lottie 
+                animationData={animationData} 
+                loop={true}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ) : (
+            <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110" />
+          )}
+        </div>
       </div>
       <ChatDialog 
         isOpen={isChatOpen} 
         onClose={() => setIsChatOpen(false)} 
       />
-    </div>
+    </>
   )
 }
