@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/lib/language-context'
 import { translations } from '@/lib/translations'
+import { ChatDialog } from './chat-dialog'
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,13 +21,12 @@ export function ScrollBot() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [animationData, setAnimationData] = useState<any>(null);
   const [showChat, setShowChat] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleClick = () => {
-    setShowChat(true);
+    setIsChatOpen(true);
+    setShowChat(false);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setShowChat(false);
-    }, 5000);
   };
 
   useEffect(() => {
@@ -149,6 +149,10 @@ export function ScrollBot() {
           <div className="robot-image w-[140px] h-[140px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110" />
         )}
       </div>
+      <ChatDialog 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)} 
+      />
     </div>
   )
 }
