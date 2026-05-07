@@ -56,7 +56,7 @@ export const translations = {
         },
         {
           company: 'Lifestyle Vietnam',
-          position: 'Game Developer Intern',
+          position: 'Game Developer',
           period: 'Feb 2026 - Apr 2026',
           responsibilities: [
             'Developed educational mini-games for children (ages 3–6) using Phaser 3 and Vite + TypeScript, covering mechanics such as lasso selection, drag-to-match, trace & paint letters, and voice-based pronunciation scoring',
@@ -196,7 +196,7 @@ export const translations = {
         },
         {
           company: 'Lifestyle Vietnam',
-          position: 'Lập trình viên Game (Thực tập)',
+          position: 'Lập trình viên Game',
           period: 'Tháng 2 2026 - Tháng 4 2026',
           responsibilities: [
             'Phát triển các mini-game giáo dục cho trẻ em (3-6 tuổi) sử dụng Phaser 3 và Vite + TypeScript, bao gồm các cơ chế như kéo thả, nối điểm, tập tô chữ cái và chấm điểm phát âm bằng giọng nói',
